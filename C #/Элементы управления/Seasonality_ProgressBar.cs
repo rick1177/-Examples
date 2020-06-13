@@ -1,4 +1,4 @@
-﻿using EgoldsUI;
+using EgoldsUI;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,6 +15,12 @@ namespace Seasonality_for_project.Controls
 {
     class Seasonality_ProgressBar : Control
     {
+
+        #region --События--
+        public delegate void OnValueChangedEvent(int value);
+        public event OnValueChangedEvent OnValueChanged;
+
+        #endregion
 
         #region --Переменные--
 
@@ -65,6 +71,7 @@ namespace Seasonality_for_project.Controls
                     value = _value;
                     Invalidate();
                 }
+                OnValueChanged?.Invoke(_value);
             }
         }
         public int ValueMinimum
@@ -95,6 +102,7 @@ namespace Seasonality_for_project.Controls
                     value = _valueMinimum;
                     Invalidate();
                 }
+                //OnValueChanged?.Invoke(_value);
             }
         }
         public int ValueMaximum
@@ -124,6 +132,7 @@ namespace Seasonality_for_project.Controls
                     value = _valueMaximum;
                     Invalidate();
                 }
+                //OnValueChanged?.Invoke(_value);
             }
         }
         public int ValueMiddle
@@ -141,6 +150,7 @@ namespace Seasonality_for_project.Controls
                     value = _valueMiddle;
                     Invalidate();
                 }
+                //OnValueChanged?.Invoke(_value);
             }
         }
 
@@ -268,8 +278,8 @@ namespace Seasonality_for_project.Controls
                     y = e.Y;
                     timer.Elapsed += OnTimedEvent;
                     timer.Start();
-                    Value = Value;
-                    File.AppendAllText("log.txt", "OnMouseDown\r\n");
+                    //Value = Value;
+                    //File.AppendAllText("log.txt", "OnMouseDown\r\n");
                 }
             }         
         }
@@ -291,7 +301,7 @@ namespace Seasonality_for_project.Controls
                 if (Value < -100) { Value = -100; }
             }
             OnTimedEventValue = Value;
-            File.AppendAllText("log.txt", "OnTimedEvent\r\n");
+            //File.AppendAllText("log.txt", "OnTimedEvent\r\n");
         }
 
 
@@ -312,7 +322,7 @@ namespace Seasonality_for_project.Controls
                     Value = -(int)(reultation / rectProgressCentralLinePosition * ValueMaximum);
                     if (Value < -100) { Value = -100; }
                 }
-                File.AppendAllText("log.txt", "OnMouseMove\r\n");
+                //File.AppendAllText("log.txt", "OnMouseMove\r\n");
             }            
         }
 
@@ -350,7 +360,7 @@ namespace Seasonality_for_project.Controls
                 //MessageBox.Show("Координаты Y " + e.Location.Y);
                 mb = MouseButtons.None;
                 st.Reset();
-                File.AppendAllText("log.txt", "OnMouseUp\r\n");
+                //File.AppendAllText("log.txt", "OnMouseUp\r\n");
             }
         }
 
@@ -368,7 +378,7 @@ namespace Seasonality_for_project.Controls
                 Value = -(int)(reultation / rectProgressCentralLinePosition * ValueMaximum);
                 if (Value < -100) { Value = -100; }
             }
-            File.AppendAllText("log.txt", "OnMouseDoubleClick\r\n");
+            //File.AppendAllText("log.txt", "OnMouseDoubleClick\r\n");
 
         }
         #endregion
