@@ -16,6 +16,9 @@ namespace Seasonality_for_project.Controls
     class Seasonality_ProgressBar : Control
     {
 
+        public Control ValueControl { get; set; }
+
+       
         #region --События--
         public delegate void OnValueChangedEvent(int value);
         public event OnValueChangedEvent OnValueChanged;
@@ -71,6 +74,7 @@ namespace Seasonality_for_project.Controls
                     value = _value;
                     Invalidate();
                 }
+                if (ValueControl != null) Invoke(new Action(() => ValueControl.Text =  (-value).ToString()));
                 OnValueChanged?.Invoke(_value);
             }
         }
